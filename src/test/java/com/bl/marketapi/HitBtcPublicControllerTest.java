@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,21 +24,29 @@ class HitBtcPublicControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void testGetOrderbooks() throws Exception {
-        mockMvc.perform(get("/public/orderbook/ETHBTC?limit=10")
+    void testGetSymbol() throws Exception {
+        mockMvc.perform(get("/hit-btc-public/symbol")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attribute("orderbook", hasProperty("ask", hasSize(10))))
-                .andExpect(MockMvcResultMatchers.model().attribute("orderbook", hasProperty("bid", hasSize(10))))
+                .andDo(print());
+    }
+
+    @Test
+    void testGetOrderbooks() throws Exception {
+        mockMvc.perform(get("/hit-btc-public/orderbook/ETHBTC?limit=10")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.ask", hasSize(10)))
+                .andExpect(jsonPath("$.bid", hasSize(10)))
                 .andDo(print());
     }
 
     @Test
     void testGetCandles() throws Exception {
-        mockMvc.perform(get("/public/candles/ETHBTC?limit=10&period=M30")
+        mockMvc.perform(get("/hit-btc-public/candles/ETHBTC?limit=10&period=M30")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().attribute("candleList", hasSize(10)))
+                .andExpect(jsonPath("$", hasSize(10)))
                 .andDo(print());
     }
 }

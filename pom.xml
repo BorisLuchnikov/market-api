@@ -20,6 +20,7 @@
         <junit-platform-launcher.version>1.2.0</junit-platform-launcher.version>
         <junit-platform-runner.version>1.2.0</junit-platform-runner.version>
         <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
     </properties>
 
     <parent>
@@ -47,6 +48,17 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger2.version}</version>
         </dependency>
 
         <dependency>
