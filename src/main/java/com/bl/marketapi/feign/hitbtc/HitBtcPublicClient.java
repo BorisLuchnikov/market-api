@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 
-@FeignClient(name = "hitBtcPublicClient", url = "https://api.hitbtc.com/api/2")
+@FeignClient(name = "hitBtcPublicClient", url = "${feign.hitbtc.url}")
 @RequestMapping(value = "/public")
 public interface HitBtcPublicClient {
 

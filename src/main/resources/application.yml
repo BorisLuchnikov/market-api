@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: "dev"
+
+---
+
+spring:
+  profiles: dev
+
+feign:
+  hitbtc:
+    url: "https://api.hitbtc.com/api/2"
